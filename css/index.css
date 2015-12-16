@@ -1,0 +1,38 @@
+/*
+html, body {
+    min-height: 100%;
+    background-color: transparent;
+}
+
+html {
+    background: url('http://7xlotq.com1.z0.glb.clouddn.com/o_19vs0vdokb281h4m1jog13nl191s9.png') center no-repeat fixed;
+    background-size: cover;
+}
+*/
+
+md-toolbar .username {
+    font-size: 14px;
+}
+
+md-list-item .user-name {
+    margin: 0;
+}
+
+.button-small {
+    min-width: 16px;
+}
+
+.time::before {
+    content: "\00b7";
+    margin-right: 3px;
+}
+
+.time {
+    font-size: 11px;
+    font-weight: normal;
+    color: #888;
+}
+
+.user-name {
+    font-size: 11px;
+}

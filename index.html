@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="zh-CN" ng-app="myTwitter">
+<head>
+  <meta charset="UTF-8">
+  <title>My Twitter</title>
+  <link rel="stylesheet" href="node_modules/angular-material/angular-material.min.css"/>
+  <link rel="stylesheet" href="node_modules/material-icons/material-icons.css">
+  <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+
+<div class="container" layout="column" layout-fill>
+  <md-toolbar md-scroll-shrink ng-controller="toolbarCtrl">
+    <div class="md-toolbar-tools">
+      <h1>My Twitter</h1>
+      <span flex></span>
+      <span class="username" ng-if="user.id">{{user.name}}</span>
+      <md-button ng-if="user.id" class="button-small" ng-click="logout()">退出</md-button>
+    </div>
+  </md-toolbar>
+
+  <md-content flex layout-padding>
+    <form ng-if="!user.id" ng-controller="userCtrl">
+      <md-input-container class="md-block">
+        <label>用户名</label>
+        <input type="text" ng-model="user.name">
+      </md-input-container>
+      <md-input-container class="md-block">
+        <label>密码</label>
+        <input type="password" ng-model="user.password">
+      </md-input-container>
+
+      <div layout="row" layout-align="end">
+        <md-button ng-disabled="logining" ng-click="login()" class="md-raised md-primary">
+          <md-progress-circular ng-if="logining" style="margin: 0 auto;" md-mode="indeterminate" md-diameter="20px"></md-progress-circular>
+          <span ng-if="!logining">登录</span>
+        </md-button>
+        <md-button ng-disabled="reging" ng-click="reg()" class="md-raised md-warn">
+          <md-progress-circular ng-if="reging" style="margin: 0 auto;" md-mode="indeterminate" md-diameter="20px"></md-progress-circular>
+          <span ng-if="!reging">注册</span>
+        </md-button>
+      </div>
+    </form>
+
+    <div ng-controller="tweetsCtrl" ng-if="user.id">
+      <form layout="column">
+        <md-input-container class="md-block" style="margin-bottom: 0">
+          <textarea ng-model="tweets.content" placeholder="有什么新鲜事?" rows="3" md-maxlength="140"></textarea>
+        </md-input-container>
+        <div layout="row" layout-align="end">
+          <md-button ng-disabled="pubing" class="md-primary md-raised" style="margin-right: 0;text-align: center;" ng-click="publish()">
+            <md-progress-circular ng-if="pubing" style="margin: 0 auto;" md-mode="indeterminate" md-diameter="20px"></md-progress-circular>
+            <span ng-if="!pubing">发布</span>
+          </md-button>
+        </div>
+      </form>
+
+      <md-list>
+        <md-list-item class="tweet-item" style="padding: 4px 0;" ng-repeat="t in tweets.list | orderBy:'':true">
+          <div class="md-list-item-text">
+            <h4 class="user-name">
+              {{t.get('user').get('username')}}
+              <span class="time">{{t.get('updatedAt') | date: 'yyyy-M-dd HH:mm:ss'}}</span>
+            </h4>
+            <p style="margin: 3px 0 0;">{{t.get('text')}}</p>
+          </div>
+        </md-list-item>
+      </md-list>
+
+    </div>
+  </md-content>
+</div>
+
+<script src="js/parse-1.6.7.min.js"></script>
+<script src="node_modules/angular/angular.min.js"></script>
+<script src="node_modules/angular-animate/angular-animate.min.js"></script>
+<script src="node_modules/angular-aria/angular-aria.min.js"></script>
+<script src="node_modules/angular-messages/angular-messages.min.js"></script>
+<script src="node_modules/angular-route/angular-route.min.js"></script>
+<script src="node_modules/angular-material/angular-material.min.js"></script>
+<script src="js/index.js"></script>
+</body>
+</html>
