@@ -23,12 +23,10 @@
   <md-content flex layout-padding>
     <form ng-if="!user.id" ng-controller="userCtrl">
       <md-input-container class="md-block">
-        <label>用户名</label>
-        <input type="text" ng-model="user.name">
+        <input placeholder="用户名" type="text" ng-model="user.name">
       </md-input-container>
       <md-input-container class="md-block">
-        <label>密码</label>
-        <input type="password" ng-model="user.password">
+        <input placeholder="密码" type="password" ng-model="user.password">
       </md-input-container>
 
       <div layout="row" layout-align="end">
